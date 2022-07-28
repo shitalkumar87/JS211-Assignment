@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #navbar{
+            display: flex;
+            justify-content: space-between;
+            background-color: black;
+             
+        }
+        a{
+            color: white;
+        }
+
+        #category{
+            display: flex;
+            gap: 50px;
+        }
+        h1{
+            text-align: center;
+            font-family: sans-serif;
+            font-weight: 600;
+        }
+        #Inventory{
+            display: flex;
+            /* border: 1px solid black; */
+            height: 400px;
+            gap: 100px;
+             
+
+        }
+         
+        #trousers{
+            height: 300px;
+            width: 30%;
+            /* border: 1px solid black; */
+            margin: auto;
+             
+        }
+        #shoes{
+            height: 300px;
+            width: 30%;
+            /* border: 1px solid black; */
+
+        }
+        #Tshirt{
+            height: 300px;
+            width: 30%;
+            /* border: 1px solid black; */
+        }
+        input[type="text"]{
+     /* margin-left: 280px; */
+    padding: 10px;
+    /* border: 1px solid #ccc; */
+    border-radius: 5px;
+    width: 95%;
+     border: 1px solid #ccc;
+    margin-top: 40px;
+    color: black;
+    background-color: gold;
+    
+}
+#cat{
+    padding: 10px;
+    /* border: 1px solid #ccc; */
+    border-radius: 5px;
+    width: 100%;
+     border: 1px solid #ccc;
+    margin-top: 40px;
+    color: black;
+    background-color: gold;
+    font-size: 20px;
+
+}
+button{
+    padding: 10px;
+    /* border: 1px solid #ccc; */
+    border-radius: 4px;
+    width: 100%;
+     border: 1px solid #ccc;
+    margin-top: 40px;
+    color: black;
+    background-color: teal;
+    font-size: 20px;
+}
+
+    </style>
+</head>
+<body>
+      <div id="navbar">
+        <h3><a href="./index.html">Home</a></h3>
+        <div id="category"> 
+           
+         <h3><a href="trousers.html">Trousers Inventory</a></h3>
+        <h3><a href="shoes.html">Shoes Inventory</a></h3>
+        <h3><a href="tshirt.html">Tshirt Inventory</a></h3>
+    </div>
+      </div>
+
+      
+
+       <div id="Inventory">
+
+        
+         
+         
+
+         <div id="trousers">
+            <input type="text" id="name" placeholder="Name">
+             
+             <select name="" id="cat">
+              
+                <option value="">Category</option>
+                <option value="Trousers">Trousers</option>
+                <option value="Tshirt">Tshirt</option>
+                <option value="Shoes">Shoes</option>
+                
+
+             </select>
+            <input type="text" id="price" placeholder="price">
+            <input type="text" id="image" placeholder="url">
+            <button onclick="submit()" id="submit">Submit</button>
+
+         </div>
+
+ 
+
+       </div>
+
+
+</body>
+</html>
+<script>
+       function  product(n,c,p,i){
+         this.name=n
+        this.category=c
+        this.price=p
+        this.image=i
+    }
+       let  submit=()=>{
+
+           
+        let category=document.getElementById("cat").value;
+        let name=document.getElementById("name").value;
+        let price=document.getElementById("price").value;
+        let url=document.getElementById("image").value;
+         
+        let data=JSON.parse(localStorage.getItem("productdata"))||[]
+       
+        let p=new  product(name,category,price,url)
+          data.push(p)
+        localStorage.setItem("productdata",JSON.stringify(data))
+          console.log(data)
+        // console.log(p)
+       }
+
+       
+        
+     
+</script>

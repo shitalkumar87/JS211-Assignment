@@ -1,0 +1,81 @@
+#navbar{
+    display: flex;
+    justify-content: space-between;
+    background-color: black;
+     
+}
+a{
+    color: white;
+}
+
+#category{
+    display: flex;
+    gap: 50px;
+}
+h1{
+    text-align: center;
+    font-family: sans-serif;
+    font-weight: 600;
+}
+#Inventory{
+    display: flex;
+    /* border: 1px solid black; */
+    height: 400px;
+    gap: 100px;
+     
+
+}
+ 
+#trousers{
+    height: 300px;
+    width: 30%;
+    /* border: 1px solid black; */
+    margin: auto;
+     
+}
+#shoes{
+    height: 300px;
+    width: 30%;
+    /* border: 1px solid black; */
+
+}
+#Tshirt{
+    height: 300px;
+    width: 30%;
+    /* border: 1px solid black; */
+}
+input[type="text"]{
+/* margin-left: 280px; */
+padding: 10px;
+/* border: 1px solid #ccc; */
+border-radius: 5px;
+width: 95%;
+border: 1px solid #ccc;
+margin-top: 40px;
+color: black;
+background-color: gold;
+
+}
+#cat{
+padding: 10px;
+/* border: 1px solid #ccc; */
+border-radius: 5px;
+width: 100%;
+border: 1px solid #ccc;
+margin-top: 40px;
+color: black;
+background-color: gold;
+font-size: 20px;
+
+}
+button{
+padding: 10px;
+/* border: 1px solid #ccc; */
+border-radius: 4px;
+width: 100%;
+border: 1px solid #ccc;
+margin-top: 40px;
+color: white;
+background-color: teal;
+font-size: 20px;
+}

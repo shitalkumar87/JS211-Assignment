@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/index.css">
+</head>
+<body>
+    <div id="navbar">
+        <h3><a href="./index.html">Home</a></h3>
+        <div id="category"> 
+           
+         <h3><a href="trousers.html">Trousers Inventory</a></h3>
+        <h3><a href="shoes.html">Shoes Inventory</a></h3>
+        <h3><a href="tshirt.html">Tshirt Inventory</a></h3>
+    </div>
+      </div>
+
+      <div id="container"></div>
+</body>
+</html>
+<script>
+      let data=JSON.parse(localStorage.getItem("productdata"))
+      //  console.log(data)
+       
+      
+     
+        
+        
+           
+          let append=(data)=>{
+            
+            let cont=document.getElementById("container")
+
+            data.forEach((el,index)=>{
+                console.log(el)
+              if(el.category=="Shoes"){
+                  
+                let div=document.createElement("div")
+                div.id="box"
+
+                            let img=document.createElement("img")
+                            img.src=el.image
+
+                            let nam=document.createElement("p")
+                              nam.innerText=el.category
+
+                            let amt=document.createElement("p")
+
+                            amt.innerText= `Price  ${el.price}`
+
+                            let btn=document.createElement("button")
+                            btn.innerText="Remove"
+                            btn.id="btn"
+                            btn.onclick=()=>
+                                {
+                                    remove(index)
+                                    
+                                }
+                            
+                            
+
+                            div.append(img,nam,amt,btn)
+                            cont.append(div)
+
+              }
+
+               
+                                      
+
+              
+            })
+
+          }
+        
+          append(data)
+
+
+          function remove(index){
+
+let data=JSON.parse(localStorage.getItem("productdata"))||[]
+
+let newdata=data.filter(function(el,i){
+
+    if(i===index){
+        let trash=JSON.parse(localStorage.getItem("trash"))||[]
+        trash.push(el)
+        localStorage.setItem("trash",JSON.stringify(trash))
+    }
+
+    else{
+        return i!=index
+    }
+})
+ localStorage.setItem("productdata",JSON.stringify(newdata))
+}
+</script>
