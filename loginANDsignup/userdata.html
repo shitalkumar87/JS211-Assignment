@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Userproduct</title>
+    <style>
+        *{
+            background-color: black;
+        }
+        h1{
+            color: aqua;
+            font-family: sans-serif;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        #container{
+    display: grid;
+    grid-template-columns: repeat(3,30%);
+    grid-gap: 3%;
+}
+
+img{
+    height: 200px;
+    width: 70%;
+}
+ 
+img{
+    height: 300px;
+    width: 250px;
+    margin-top: 30px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+ 
+#box{
+  
+  border: 3px solid white;
+  color: white;
+  text-align: center;
+}
+
+#btn{
+    /* color: white; */
+    background-color: aqua;
+    padding:  12px 40px 12px 40px;
+    border-radius: 5px;
+    border: none;
+    margin-bottom: 10px;
+}
+    </style>
+</head>
+<body>
+      <h1>List of All product</h1>
+      <div id="container"></div>
+</body>
+</html>
+<script>
+
+let data=JSON.parse(localStorage.getItem("productdata"))
+
+ 
+let append=(data)=>{
+            
+            let cont=document.getElementById("container")
+
+            data.forEach((el,index)=>{
+                
+               
+                  
+                let div=document.createElement("div")
+                div.id="box"
+
+                            let img=document.createElement("img")
+                            img.src=el.image
+
+                            let nam=document.createElement("p")
+                              nam.innerText=el.category
+
+                            let amt=document.createElement("p")
+
+                            amt.innerText=`price :${el.price}`
+
+                            let btn=document.createElement("button")
+                            btn.innerText="Add To Cart"
+                            btn.id="btn"
+                            btn.onclick=()=>{
+                              remove(index)
+                            }
+                            
+
+                            div.append(img,nam,amt,btn)
+                            cont.append(div)
+              
+            })
+
+          }
+        
+          append(data)
+</script>

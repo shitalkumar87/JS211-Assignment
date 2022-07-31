@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Login</title>
+    <link rel="stylesheet" href="./css/navbar.css">
+</head>
+<body>
+        <div id="navbar">
+
+            <h3><a href="./index.html">Home</a></h3>
+
+            <div id="category">
+                <h3><a href="./signup.html">Signup</a></h3>
+                <h3><a href="./index.html">Login</a></h3>
+                <h3><a href="./Admin.html">Admin</a></h3>
+
+
+            </div>
+
+        </div>
+
+        <div class="inputbox">
+            <h3> User Login</h3>
+           
+            <input type="email" id="mail" placeholder="Email" >
+            <input type="password" id="pwd" placeholder="Password">
+            <button onclick="login()"> Login </button>
+
+        </div>
+         
+</body>
+</html>
+<script>
+     
+     let userdata=JSON.parse(localStorage.getItem("userdata"))
+       console.log(userdata.length)
+       
+       
+
+        
+        let login=()=>{
+              
+            let email=document.getElementById("mail").value
+            let pwd=document.getElementById("pwd").value
+            
+            
+            let flag=false
+        
+            for( let i=0;i<userdata.length;i++){
+                 
+                 if(email===userdata[i].email && pwd===userdata[i].pwd){
+                     flag=true
+                     break;
+                 }
+
+                 else{
+                    flag=false
+                 }
+
+                 
+              }
+
+
+              if(flag==true){
+                alert("login succesfully")
+                     window.location.href="userdata.html"
+              }
+
+              else{
+                alert("wrong credentials")
+              }
+
+               
+        
+    
+        
+         
+       
+    }
+
+     
+
+
+
+</script>

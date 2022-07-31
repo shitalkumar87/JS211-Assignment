@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+
+        #navbar{
+            /* border: 1px solid black;  */
+            /* padding: 10px; */
+            justify-content: space-between;
+            display: flex;
+        }
+
+       
+        #box{
+             
+            margin: auto;
+            height: 360px;
+            width: 500px;
+            /* border: 1px solid black; */
+            margin-top: 100px;
+            background-color: black;
+        }
+
+        input[type="text"],[type="date"]{
+             margin-top: 16px;
+            width: 95%;
+            padding: 12px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        button{
+            margin-top: 16px;
+            width: 100%;
+            padding: 12px;
+            font-size: 20px;
+            background-color: gold;
+            border-radius: 5px;
+            
+        }
+        h1{
+            position: relative;
+            font-size: 40px;
+            font-weight: 600;
+            font-family: sans-serif;
+             
+        }
+        
+    </style>
+</head>
+<body>
+    <div id="navbar">
+        <h3>  <img src="https://www.irctc.co.in/nget/assets/images/secondry-logo.png" alt=""></h3>
+
+             <h1>Indian Railway</h1>
+            <h5 id="list">Waiting list</h5>
+
+         
+    </div>
+    
+    <div id="box">
+
+    
+     <input type="text" id="name" placeholder="Name">
+     <input type="text" id="num" placeholder="Number">
+     <input type="text" id="From" placeholder="FROM">
+     <input type="text" id="To" placeholder="To">
+     <input type="date" id="date" placeholder="Date">
+     <button onclick="submit()">Submit</button>
+    </div>
+</body>
+</html>
+<script>
+
+     let seat=100
+     let waiting=105
+
+    let set; 
+    let id;
+    let submit=()=>{
+        
+         
+         
+        let name=document.getElementById("name").value
+        waiting++
+         
+        alert(`${name} your waiting ticket Number is,${waiting}`)
+        set= setInterval(()=>{
+             
+        waiting--
+        if(waiting>100){
+            document.getElementById("list").innerText=`${name} waiting ticket :${waiting}`
+        }
+        else{
+            document.getElementById("list").innerText=`${name} your ticket confirm now :${waiting}`
+        }
+         
+        if(waiting==100){
+             
+          clearInterval(set)
+        }
+          
+     },3000)
+
+        let p=new Promise((res,rej)=>{
+         waiting++
+           id= setInterval(()=>{
+             
+                if(waiting<=100){
+                    clearInterval(id)
+                    res("confirm ticket")
+                }
+                // else{
+                //      rej("waiting")
+                // }
+
+            },3000)
+        })
+
+        p.then((res)=>{
+         alert(`${name}, ${res}`)
+        }) 
+        p.catch((err)=>{
+            alert(`${name}, ${err}`)
+        })
+    }
+</script>

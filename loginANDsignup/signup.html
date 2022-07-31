@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup page</title>
+    <link rel="stylesheet" href="../css/navbar.css">
+</head>
+<body>
+
+    <div id="navbar">
+
+        <h3><a href="../index.html">Home</a></h3>
+
+        <div id="category">
+            <h3><a href="./signup.html">Signup</a></h3>
+            <h3><a href="../index.html">User Login</a></h3>
+            <h3><a href="./Admin.html">Admin User</a></h3>
+
+
+        </div>
+
+    </div>
+        <div class="signupbox">
+            <h3>User Signup</h3>
+
+            <input type="text" id="name" placeholder="Name" >
+            <input type="email" id="mail" placeholder="Email">
+            <input type="password" id="pwd" placeholder="password">
+    
+            <button onclick="signup()">Signup</button>
+        </div>
+</body>
+</html>
+<script>
+   
+   let userdata=JSON.parse(localStorage.getItem("userdata"))||[]
+   console.log(userdata)
+        function Consumerdata(e,p){
+            this.email=e
+            this.pwd=p
+        }
+        let signup=()=>{
+
+            let email=document.getElementById("mail").value
+            let pwd=document.getElementById("pwd").value
+
+            let s1=new Consumerdata(email,pwd)
+
+            userdata.push(s1)
+            alert("signup Successfully")
+            window.location.href="index.html"
+            localStorage.setItem("userdata",JSON.stringify(userdata))
+        }
+   
+</script>
