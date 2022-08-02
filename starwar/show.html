@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            background-color: black;
+        }
+         #star-char{
+        height: 600px;
+        width: 100%;
+        border: 1px solid black;
+         
+    }
+
+    #star{
+        height: 200px;
+        width: 500px;
+        /* border: 1px solid black; */
+        margin: auto;
+        display: flex;
+        justify-content: space-around;
+        cursor: pointer;  
+         
+    }
+    #personal{
+         
+        height: 200px;
+        width: 200px;
+        border: 1px solid black;
+        border-radius: 10px;
+        text-align: center;
+        color: #ebcf13;
+        border: 1px solid  #ebcf13;
+    }
+    #anatomy{
+        
+        height: 200px;
+        width: 200px;
+        
+        border-radius: 10px;
+        text-align: center;
+        color: #ebcf13;
+        border: 1px solid  #ebcf13;
+        
+    }
+    #anatomy :hover{
+        border: white;
+       cursor: pointer;  
+        color: white;
+    
+        
+    }
+
+    #personal :hover{
+        
+       cursor: pointer;  
+        color: white;
+    
+        
+    }
+
+   
+    h1{
+        cursor: pointer;
+        text-align: center;
+        margin-top: 100px;
+        font-weight: 700;
+        font-family: sans-serif;
+        color: #ebcf13;
+         
+    }
+    #btn{
+        cursor: pointer;
+        margin-top: 40px;
+        margin-left: 620px;
+        padding: 12px 15px;
+        border-radius: 10px;
+        border: 1px solid  #ebcf13;
+        color: #ebcf13;
+    }
+   
+    </style>
+</head>
+<body>
+       <div id="star-char">
+             <h1 id="title"></h1>
+        <div id="star">
+              
+            <div id="personal"></div>
+            <div id="anatomy"></div>
+             
+            
+        </div>
+        <button id="btn">Go back</button>
+
+       </div>
+</body>
+</html>
+<script>
+     let data=JSON.parse(localStorage.getItem("char"))
+           console.log(data)
+
+          let append=(data)=>{
+             
+                 
+                let person=document.getElementById("personal")
+                 person.innerHTML=null
+
+                 let h1=document.createElement("h2")
+                h1.innerText="Personal Info"
+             
+               let year=document.createElement("h4")
+                 year.innerText=`Birth Year  :${data.birth_year}`
+
+                let gender=document.createElement("h4")
+                 gender.innerText=`Gender  :${data.gender}`
+
+                let height=document.createElement("h4")
+                 height.innerText=`Height  :${data.height}`
+
+
+             person.append(h1,year,gender,height)
+
+            
+             
+
+          }
+
+
+
+          let append2=(data)=>{
+              
+                
+
+               let char=document.createElement("h1")
+               char.innerText=data.name
+             let h1=document.createElement("h2")
+             h1.innerText="Anatomy"
+             let anatomy=document.getElementById("anatomy")
+              anatomy.innerHTML=null
+          
+            let year=document.createElement("h4")
+              year.innerText=`Eye Color  :${data.eye_color}`
+
+             let gender=document.createElement("h4")
+              gender.innerText=`Mass  :${data.mass}`
+
+             let height=document.createElement("h4")
+              height.innerText=`Hair Color  :${data.hair_color}`
+
+
+          anatomy.append(h1,year,gender,height)
+           
+
+         
+          
+
+       }
+
+       let append3=(data)=>{
+              
+            let char=document.getElementById("title")
+              anatomy.innerHTML=null
+
+              let title=document.createElement("h3")
+              title.innerText=data.name
+
+               
+
+              char.append(title)
+          
+
+            }
+     
+
+            append3(data)  
+         append2(data)
+          append(data)
+
+          document.getElementById("btn").addEventListener("click",function(){
+               goback()
+          })
+
+          function goback(){
+            window.location.href="index.html"
+          }
+
+     
+</script>

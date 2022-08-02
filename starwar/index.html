@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            padding: 0px;
+            margin: 0;
+        }
+        #box{
+              background-image: url('https://i.gifer.com/1nLz.gif');
+                background-size: cover;
+                background-repeat:no-repeat;
+              height: 100vh;
+              text-align: center;
+            }
+           input[type="text"]{
+            
+            width: 30%;
+            padding: 20px;
+             margin-top: 200px;
+             border-radius: 5px;
+             background-color: aqua;
+             border: 1px solid brown;
+           }
+
+           #container{
+            /* border: 1px solid aqua; */
+            height: 300px;
+            width: 470px;
+            margin: auto;
+            overflow: auto;
+            
+
+           }
+           .name{
+             color: aqua;
+             font-size: 30px;
+             margin-top: 10px;
+           }
+           
+    </style>
+</head>
+<body>
+        <div id="box">
+
+            <input oninput="debounce(1000,main)" type="text" id="query" placeholder="starwar characters">
+            <div id="container"></div>
+
+        </div>
+</body>
+</html>
+<script>
+       
+        
+
+
+       let getdata=async(query)=>{
+         let url=` https://swapi.dev/api/people/?search=${query}`
+        
+        let res=await fetch(url)
+
+        let data=await res.json()
+        return data.results
+       }
+      
+       
+      let main = async()=>{
+      let query=document.getElementById("query").value
+       
+       let data=await getdata(query)
+        console.log(data)
+        append(data)
+   }
+
+       let append=(data)=>{
+
+        let cont=document.getElementById("container")
+            cont.innerHTML=null
+        data.forEach((el)=>{
+          
+            let name=document.createElement("h2")
+            name.innerText=el.name
+            name.addEventListener("click",function(){
+                results(el)
+            })
+            name.setAttribute("class","name")
+
+            cont.append(name)
+        })
+       }
+        
+       let id;
+       function debounce(delay,func){
+        if(id){
+            clearTimeout(id)
+        }
+
+       id= setTimeout(()=>{
+            func()
+        },delay)
+       }
+      
+      function results(el){
+        localStorage.setItem("char",JSON.stringify(el))
+        window.location.href="show.html"
+      }
+</script>

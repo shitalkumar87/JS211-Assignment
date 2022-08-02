@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Articles</title>
+    <style>
+        #container{
+            margin-top: 50px;
+            display: grid;
+            grid-template-columns: repeat(5,15%);
+            grid-gap: 5%;
+             
+        }
+        *{
+            background-color: black;
+             
+           
+        }
+        #box{
+            border: 1px solid aqua ; 
+ 
+             text-align: center;
+            color: #ebcf13 ; ;
+            
+        }
+        #sort{
+            color: #ebcf13;
+            padding: 12px;
+            font-size: 12px;
+            font-weight: 700;
+        }
+        h1{
+            text-align: center;
+            color: #ebcf13;
+            font-weight: 700;
+            font-size: 80px;
+        }
+    </style>
+</head>
+<body> 
+        
+
+    <select name="" id="sort" onchange="sorting()">
+        <option value="">comment sorting articles</option>
+        <option value="lth">Low to high comment</option>
+        <option value="htl">high to low comment</option>
+    </select>
+       <h1>Articles</h1>
+
+    <div id="container"></div>
+    
+</body>
+</html>
+<script>
+    let allpromises=[]
+     
+ for(var i=1;i<=5;i++){
+     let url=`https://jsonmock.hackerrank.com/api/articles?page=${i}`
+     let promises=fetch(url).then((res)=> res.json())
+     allpromises.push(promises)
+ }
+ 
+ let result=[]
+ let getdata=async()=>{
+    let data=await Promise.all(allpromises)
+    console.log(data)
+    for(var i=0;i<data.length;i++){
+        result.push(...data[i].data)
+    }
+      
+    console.log(result)
+    append(result)
+ }
+   
+   
+ 
+ getdata()
+
+                        let append=(data)=>{
+
+                            let cont=document.getElementById("container")
+                            cont.innerHTML=null
+                       data.forEach((el)=>{
+                          
+                        let div=document.createElement("div")
+                           div.id="box"
+                        let title=document.createElement("h3")
+                        title.innerText=`Title:${el.title}`
+
+                        let author=document.createElement("h3")
+                         author.innerText=`Author :${el.author}`
+
+                        let cmt=document.createElement("h3")
+                        cmt.innerText=`comment: ${+el.num_comments}`
+
+                        div.append(title,author,cmt)
+                        cont.append(div)
+
+
+
+                       })
+                            
+                        }
+
+
+                        function sorting(a,b){
+                            let comment=document.getElementById("sort").value
+
+                            if(comment==="lth"){
+                              result.sort(function(a,b){
+
+                                return +a.num_comments-b.num_comments
+                              })  
+                             
+                              append(result)
+
+                            }
+
+                            if(comment==="htl"){
+                              result.sort(function(a,b){
+
+                                return +b.num_comments-a.num_comments
+                              })  
+                             
+                              append(result)
+
+                            }
+                            
+                            
+                        }
+</script>
