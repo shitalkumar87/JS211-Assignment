@@ -37,6 +37,13 @@
             font-weight: 700;
             font-size: 80px;
         }
+
+        #sorttitle{
+            color: #ebcf13;
+            padding: 12px;
+            font-size: 12px;
+            font-weight: 700;
+        }
     </style>
 </head>
 <body> 
@@ -46,6 +53,12 @@
         <option value="">comment sorting articles</option>
         <option value="lth">Low to high comment</option>
         <option value="htl">high to low comment</option>
+    </select>
+
+    <select name="" id="sorttitle" onchange="sort()">
+        <option value="">comment sorting articles</option>
+        <option value="lth">Sorting by title</option>
+        <option value="htl">Sorting by title</option>
     </select>
        <h1>Articles</h1>
 
@@ -65,12 +78,12 @@
  let result=[]
  let getdata=async()=>{
     let data=await Promise.all(allpromises)
-    console.log(data)
+    // console.log(data)
     for(var i=0;i<data.length;i++){
         result.push(...data[i].data)
     }
       
-    console.log(result)
+    // console.log(result)
     append(result)
  }
    
@@ -105,7 +118,7 @@
                         }
 
 
-                        function sorting(a,b){
+                        function sorting(){
                             let comment=document.getElementById("sort").value
 
                             if(comment==="lth"){
@@ -126,8 +139,53 @@
                              
                               append(result)
 
-                            }
-                            
-                            
+                            } 
                         }
+
+
+                     function sort(){
+
+                        let comment=document.getElementById("sorttitle").value
+
+                        if(comment==="lth"){
+                              result.sort(function(a,b){
+
+                                 var X=a.title;
+                                 var Y=b.title;
+
+                                 if(X<Y){
+                                    return 1;
+                                 }
+
+                                 if(X>Y){
+                                    return -1;
+                                 }
+                              })  
+                             
+                              append(result)
+                              console.log(result)
+             
+                            }
+
+
+                            if(comment==="htl"){
+                              result.sort(function(a,b){
+
+                                 var X=a.title;
+                                 var Y=b.title;
+
+                                 if(X>Y){
+                                    return 1;
+                                 }
+
+                                 if(X<Y){
+                                    return -1;
+                                 }
+                              })  
+                             
+                              append(result)
+                               console.log(result)
+                            }
+
+                     }
 </script>

@@ -19,10 +19,10 @@ class Todo{
     }
    
  toggleStatus(id){
-    this.#todos=this.#todos.map((el)=>{
+    this.#todos=this.#todos.map((el)=>
         el.id===id ?{...el,status: !el.status}:el
          
-    })
+    )
  }
  deleteItem(id){
     this.#todos=this.#todos.filter((el)=> el.id!==id)
@@ -47,22 +47,28 @@ addBtn.onclick=()=>{
 })
 
 function Todoitem({  id,  title,  status}){
-      
+      console.log(id)
     const div=document.createElement("div")
+         div.id="cont"
+        
     const li=document.createElement("li")
+    li.id="list"
+     
     li.innerHTML=`${title} - ${status} -${id}`
     
 
     let btn=document.createElement("button")
     btn.textContent="Toggle"
+    btn.id="btn"
     btn.onclick=()=>{
-         
+        btn.style.backgroundColor="green"
         list.toggleStatus(id)
         renderdom()
     }
 
     let del=document.createElement("button")
     del.textContent="Remove"
+    del.id="del"
     del.onclick=()=>{
         list.deleteItem(id)
         renderdom()

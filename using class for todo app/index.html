@@ -5,16 +5,90 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Todo</title>
+    <style>
+        #box{
+
+            height: 100px;
+            width: 300px;
+            /* border: 1px solid black; */
+            margin: auto;
+            margin-top: 100px;
+        }
+
+        input{
+            width: 92%;
+            padding: 12px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            background-color: yellow;
+
+        }
+
+        #Add-btn{
+            width: 100%;
+            padding: 12px;
+            border-radius: 5px;
+            margin-top: 20px;
+            border: 1px solid #ccc;
+            background-color: teal;
+        }
+
+        #Add-btn:hover{
+            background-color: aqua;
+        }
+
+        #container{
+             display: grid;
+             grid-template-columns: repeat(5,17%);
+             grid-gap: 2%;
+
+        }
+        #cont{
+            margin-top: 50px;
+            height: 130px;
+            width: 200px;
+            /* border: 1px solid black; */
+        }
+        #list{
+        
+            width: 100%;
+            /* border: 1px solid black; */
+            font-size: 20px;
+            font-weight: 700;
+        }
+        
+        #btn{
+            width: 100%;
+            padding: 4px;
+            border-radius: 2px;
+            margin-top: 4px;
+            border: 1px solid #ccc;
+            background-color: teal;
+        }
+        #del{
+            width: 100%;
+            padding: 4px;
+            border-radius: 2px;
+            margin-top: 4px;
+            border: 1px solid #ccc;
+            background-color: red;
+        }
+    </style>
 </head>
 <body>
-    <input type="text" placeholder="Add Todo" id="input">
-    <button id="Add-btn">AddTask</button>
+    <div id="box">
+        <input type="text" placeholder="Add Todo" id="input">
+        <button id="Add-btn">AddTask</button>
+
+    </div>
+    
     <div id="container"></div>
+    
 </body>
 </html>
 <script src="./index.js">
     
-   
+    
 
 
    
