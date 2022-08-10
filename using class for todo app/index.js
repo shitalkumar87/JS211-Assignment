@@ -15,6 +15,7 @@ class Todo{
             title:title,
             status:false
         }
+
         this.#todos=[...this.#todos,newItem]
     }
    
