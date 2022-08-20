@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>index page</title>
+    <link rel="stylesheet" href="./styles/index.css">
+</head>
+<body>
+         <h2> <a href="./main.html">pagination</a></h2>
+         <h1>Masai student database</h1>
+           <div class="first">
+            <div id="box">
+                <h3>Add student</h3>
+            <input type="text" id="name" placeholder="Name">
+            <input type="text" id="batch" placeholder="Batch">
+            <select  id="course" onchange="filtercourse()">
+                <option value="">course</option>
+                <option value="fwd">FSD</option>
+                <option value="DA">Data Anaylst</option>
+            <input type="number" id="age" placeholder="Age">
+            <input type="number" id="mobile" placeholder="Mobile-No">
+            <input type="number" id="score" placeholder="Evaluation score">
+             <button id="btn" onclick="todo()">Submit</button>
+            </div>
+
+            <div id="box-2"> 
+                  <h3>Delete Student</h3>
+                 <input type="text" id="id" placeholder="Delete through id">
+              <button onclick="del()" id="btn-2">Delete</button>
+            </div>
+            <div id="sort">
+                <button onclick="sortageasc()">Age Lth</button>
+                <button onclick="sortagedesc()">Age Htl</button>
+
+                <select  id="user_courses" onchange="filtercourse()">
+                    <option value="">course</option>
+                    <option value="fwd">FWD</option>
+                    <option value="DA">Data Anaylst</option>
+
+                </select>
+            </div>
+           </div>
+           <!-- <div id="btn_div"></div>
+           <div id="data_div"></div> -->
+           <div id="container"></div>
+
+               
+            
+             
+              
+
+              
+</body>
+</html>
+<script src="./index.js">
+
+</script>
