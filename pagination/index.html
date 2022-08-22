@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h3>pagination</h3>
+     <div id="data_div"></div>
+     <div id="buttons"></div>
+</body>
+</html>
+<script >
+        let data;
+        var data_div=document.getElementById("data_div")
+       async function main(){
+
+        data=await fetchdata()
+    //    console.log(data)
+          showbuttons(1)
+       }
+        
+      main()
+      async function fetchdata(){
+
+        let res=await fetch("http://jsonplaceholder.typicode.com/comments")
+
+        let data=await res.json()
+
+         return data
+    }
+
+    function showbuttons(index){
+           console.log('index',index)
+        let btn_div=document.getElementById("buttons")
+        btn_div.innerHTML=null
+        
+        let original_id=index
+        console.log(original_id)
+       if(index<=6){
+        // console.log(index)
+        index=6
+       }
+        
+        for(var i=index-5;i<=index+4;i++){
+              
+            let btn=document.createElement("button")
+              btn.innerText=i
+
+              btn.setAttribute("id",`${i} `)
+            //   btn.style.backgroundColor="green"
+               btn.onclick=showdata
+                   
+               
+
+              btn_div.appendChild(btn)
+        }
+           
+        // let btn=document.getElementById(original_id)
+        // console.log(btn)
+        //   btn.style.backgroundColor='green'
+    }
+      
+
+    //   showbuttons()
+
+
+    function showdata(){
+     
+        let id= Number(this.id)
+        // console.log(id)
+        let num=id-1
+         let pagedata=data.slice(num*10,(num*10)+10)
+         console.log(pagedata)
+
+           data_div.innerHTML=null
+         pagedata.forEach((el)=>{
+          
+            let p=document.createElement("p")
+            p.innerText=`${el.id} ${el.name}`
+
+            data_div.appendChild(p)
+         })
+         
+          
+         showbuttons(id)
+    }
+</script>
