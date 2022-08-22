@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin</title>
+    <link rel="stylesheet" href="./style/admin.css">
+    <link rel="stylesheet" href="./style/index.css">
+</head>
+<body> 
+      <div id="navbar">
+        <h3><a href="./index.html">Home</a></h3>
+        <h3><a href="">Admin </a></h3>
+      </div>
+        <h1>Admin Page</h1>
+
+       <div id="box">
+
+        <div id="menu_input">
+             <h1>Add Menu</h1>
+            <input type="text" id="image" placeholder="Menu Image">
+            <input type="text" id="title" placeholder="Menu Title">
+            <input type="text" id="description" placeholder="Menu Description">
+            <input type="number" id="price" placeholder="Menu price">
+            <input type="number" id="ratings" placeholder="Menu Rating">
+            <button id="submit" onclick="submit()">Submit</button>
+         </div>
+
+        
+
+       </div>
+
+       <div id="container"></div>
+
+      
+</body>
+</html>
+<script>
+     let data;
+ let getdata=async()=>{
+
+    let res=await fetch('https://dry-scrubland-61459.herokuapp.com/api/menu')
+
+      data=await res.json()
+     append(data)
+    console.log(data)
+ }
+
+ getdata()
+
+
+ let append=((data)=>{
+   let cont=document.getElementById("container")
+   cont.innerHTML=null
+
+   data.forEach(({description,title,image,price,rating,id})=>{
+
+    let div=document.createElement("div")
+        div.id="menu_box"
+    let pic=document.createElement("img")
+     pic.src=image
+
+     let Title=document.createElement("h3")
+         Title.innerText=title
+
+     let desc=document.createElement("h4")
+     desc.innerText=description
+
+     let amt=document.createElement("p")
+     amt.innerText=`Rs:${price}`
+
+     let rate=document.createElement("h4")
+     rate.innerText=`Rating:${rating}`
+
+     let rmvbtn=document.createElement("button")
+      rmvbtn.innerText="Remove"
+       rmvbtn.onclick=()=>{
+          del(id)
+       }
+      let EDITbtn=document.createElement("button")
+      EDITbtn.innerText="Edit"
+      EDITbtn.onclick=()=>{
+        Edit(id)
+      }
+     div.append(pic,Title,desc,amt,rate,rmvbtn,EDITbtn)
+
+     cont.append(div)
+   })
+ })
+
+
+    var admin=  admin={
+        name:'shitalsuman1',
+        email:'shitalsuman1@gmail.com'
+    }
+    let user_details=JSON.parse(localStorage.getItem("user_details"))
+     
+  let submit=async()=>{
+     
+     
+
+    // setTimeout(()=>{
+    // localStorage.setItem("user_details",JSON.stringify(null))
+    //  },10000);
+
+    if(!user_details){
+
+         alert("Login again")
+         window.location.href="login.html"
+}
+        
+       let user=await getprofile(user_details.user,user_details.token)
+       if(user.email!==admin.email){
+
+                alert("Not Authorised")
+                return
+            }
+       
+    let item={
+        id:Date.now(),
+         image:document.getElementById("image").value,
+         title:document.getElementById("title").value,
+         price:document.getElementById("price").value,
+         description:document.getElementById("description").value,
+         rating:document.getElementById("ratings").value,
+
+    }
+
+   
+
+    let res=await fetch(`https://dry-scrubland-61459.herokuapp.com/api/menu`,{
+
+        method:"POST",
+
+        body:(JSON.stringify(item)),
+
+        headers:
+    {
+        'Content-Type':'application/json'
+    },
+
+    })
+
+  }
+   
+  let del=async(id)=>{
+   let user=await getprofile(user_details.user,user_details.token)
+          
+    if(!user_details){
+
+            alert("Login again")
+            window.location.href="login.html"
+            }
+    if(user.email!==admin.email){
+
+            alert("Not Authorised")
+            return
+            }   
+    
+  let res=await fetch(`https://dry-scrubland-61459.herokuapp.com/api/menu/${id}` ,{
+
+     method:"DELETE",
+     headers:{
+         "Content-Type": "application/json",
+     }
+
+   
+     })
+       
+      
+         getdata()
+     
+
+}
+
+
+let Edit=async(id)=>{
+
+    let user=await getprofile(user_details.user,user_details.token)
+          
+    if(!user_details){
+
+            alert("Login again")
+            window.location.href="login.html"
+            }
+    if(user.email!==admin.email){
+
+            alert("Not Authorised")
+            return
+            }
+   
+   let todo= await fetch(`https://dry-scrubland-61459.herokuapp.com/api/menu/${id}`)
+        todo=await todo.json()
+         
+        let p=prompt('Update your score')
+        
+       let data={title:p}
+                  
+                     
+          
+       let res=await fetch(`https://dry-scrubland-61459.herokuapp.com/api/menu/${id}` ,{
+  
+          method:"PATCH",
+          body:JSON.stringify(data),
+      
+          headers:{
+              "Content-Type": "application/json",
+          }
+          })
+            
+          getdata()
+           
+          // let result=res.json()
+          // console.log(result)
+  
+  }
+
+  let getprofile=async(username,token)=>{
+
+let res=await fetch(`https://masai-api-mocker.herokuapp.com/user/${username}`,{
+
+  headers:
+  {
+      Authorization:`Bearer ${token}`,
+  }
+
+})
+  
+res=await res.json()
+ return res
+}
+
+
+</script>
